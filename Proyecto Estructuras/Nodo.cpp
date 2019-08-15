@@ -7,8 +7,6 @@ Nodo::Nodo() {
 	Izquierda = NULL;
 	Arriba = NULL;
 	Abajo = NULL;
-	
-
 }
 void Nodo::setId(char id) {
 	this->id = id;

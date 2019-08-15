@@ -1,10 +1,12 @@
 #include "Nodo.h"
 #include "jugador.h"
 #include <iostream>
+#include <conio.h>
 using namespace std;
 
 jugador::jugador() {
-	//ini = NULL;	
+	ini = NULL;	
+
 }
 
 void jugador::crearLista(int x, int y) {
@@ -94,6 +96,95 @@ void jugador::crearNivel(char map[][9],int x,int y) {
 		}
 		cout << endl;
 	}
+}
+
+void jugador::MenuInicio()
+{
+	int Op;
+	cout << "\t\t\t############# MENU #############\n\n";
+	cout << "\t\t\t1- Nuevo Juego\n";
+	cout << "\t\t\t2- Cargar Partida\n";
+	cout << "\t\t\t3- Salir\n\n";
+	cin >> Op;
+	switch (Op) {
+	case 1: {
+		jugador* j1 = new jugador();
+		system("cls");
+		j1->Nivel1();
+		
+		break;
+	}
+	case 2: {
+		break;
+	}
+	case 3: {
+		exit(1);
+	}
+
+	}
+}
+
+void jugador::Nivel1()
+{
+	jugador* J1 = new jugador();
+	J1->crearLista(8, 9);
+	char map[8][9] =
+	{
+		{ ' ', ' ', '#', '#', '#', ' ', ' ',' ',' '},
+		{ ' ', ' ', '#', '.', '#', ' ', ' ',' ',' '},
+		{ ' ', ' ', '#', ' ', '#', '#', '#','#',' '},
+		{ '#', '#', '#', '$', ' ', '$', '.','#',' '},
+		{ '#', '.', ' ', '$', '@', '#', '#','#',' '},
+		{ '#', '#', '#', '#', '$', '#', ' ',' ',' '},
+		{ ' ', ' ', ' ', '#', '.', '#', ' ',' ',' '},
+		{ ' ', ' ', ' ', '#', '#', '#', ' ',' ',' '}
+	};
+	cout << "MAPA 1" << endl << endl;
+	J1->crearNivel(map, 8, 9);
+	Movimientos();
+
+}
+
+void jugador::Movimientos()
+{
+#define DOWN 80
+#define UP 72
+#define RIGTH 77
+#define LEFT 75
+	
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < 9; j++) {
+			if (mat[i][j]->getId() =='@') {
+				cout << "encontrado";
+			}
+		}
+	}
+	while (1) {
+		if (_kbhit()) {
+			char tecla = _getch();
+			switch (tecla) {
+			case UP: {
+			
+				cout << "ARRIBA";
+				
+				break;
+			}
+			case DOWN: {
+				cout << "ABAJO";
+				break;
+			}
+			case RIGTH:{
+				cout << "DERECHA";
+				break;
+			}
+			case LEFT:
+				cout << "IZQUIERDA";
+				break;
+			}
+			
+
+		}
+}
 }
 
 

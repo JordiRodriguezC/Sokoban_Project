@@ -17,6 +17,8 @@ void gotoxy(int x, int y) {
 }
 int main()
 {
+	jugador* j = new jugador();
+	j->MenuInicio();
 /*	char map[8][8] =
 	{
 		{ '#', '#', '#', '#', '#', '#', '#','#' },
@@ -28,7 +30,7 @@ int main()
 		{ '#', ' ', ' ', ' ', ' ', ' ', ' ','#' },
 		{ '#', '#', '#', '#', '#', '#', '#','#' }
 	};
-
+/*
 	int x = 1, y = 1;
 	while (1) {
 
@@ -96,28 +98,7 @@ int main()
 			}
 		}
 	}*/
-	
-	
-	try {
-		
-	
-	}
-	catch (exception e) {
-
-	}
-	jugador* Carlos = new jugador();
-	Carlos->crearLista(8, 9);
-	char map[8][9] =
-	{
-		{ ' ', ' ', '#', '#', '#', ' ', ' ',' ',' '},
-		{ ' ', ' ', '#', '.', '#', ' ', ' ',' ',' '},
-		{ ' ', ' ', '#', ' ', '#', '#', '#','#',' '},
-		{ '#', '#', '#', '$', ' ', '$', '.','#',' '},
-		{ '#', '.', ' ', '$', '@', '#', '#','#',' '},
-		{ '#', '#', '#', '#', '$', '#', ' ',' ',' '},
-		{ ' ', ' ', ' ', '#', '.', '#', ' ',' ',' '},
-		{ ' ', ' ', ' ', '#', '#', '#', ' ',' ',' '}
-	};
+	/*
 	char map2[9][9] =
 	{
 		{ '#', '#', '#', '#', '#', ' ', ' ',' ', ' ' },
@@ -165,10 +146,8 @@ int main()
 		{ '#', '#', '#', '#', ' ', ' ','#',' ',' '},
 		{ ' ', ' ', ' ', '#', '#', '#','#',' ',' '}
 	};
-	cout << "MAPA 1" << endl << endl;
-	Carlos->crearNivel(map, 8, 9);
-
-	cout << endl << endl;
+	
+	/*cout << endl << endl;
 	cout << "MAPA 2" << endl << endl;
 
 	Carlos->crearLista(9, 9);
@@ -193,9 +172,9 @@ int main()
 
 	Carlos->crearLista(7, 9);
 	Carlos->crearNivel(map5, 7, 9);
-	jugador* Jordi = new jugador();
-
-	return 0;
+	jugador* Jordi = new jugador();*/
+	
+	//return 0;
 }
 
 
