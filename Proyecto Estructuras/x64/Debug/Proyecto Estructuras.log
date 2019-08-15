@@ -1,0 +1,4 @@
+﻿  Proyecto Estructuras.cpp
+C:\Users\Carlos Olivares\Documents\Universidad\II Semestre 2019\Estructura de datos\Proyecto Estructuras\Proyecto Estructuras\jugador.h(11,16): warning C4200:  se ha utilizado una extensión no estándar: matriz de tamaño cero en struct/union
+C:\Users\Carlos Olivares\Documents\Universidad\II Semestre 2019\Estructura de datos\Proyecto Estructuras\Proyecto Estructuras\jugador.h(11,16): message :  Un constructor con valor predeterminado o un operador de asignación de copia o movimiento ignorará a este miembro.
+  Proyecto Estructuras.vcxproj -> C:\Users\Carlos Olivares\Documents\Universidad\II Semestre 2019\Estructura de datos\Proyecto Estructuras\x64\Debug\Proyecto Estructuras.exe
