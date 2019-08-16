@@ -1,92 +1,96 @@
 #include "Nodo.h"
 #include "jugador.h"
 #include <iostream>
+#include <Windows.h>
 #include <conio.h>
 using namespace std;
 
 jugador::jugador() {
-	ini = NULL;	
-
+	X = 8;
+	Y = 6;
 }
 
 void jugador::crearLista(int x, int y) {
-	Nodo*** matriz = new Nodo**[x];
+	 mat = new Nodo**[x];
 	for (int i = 0; i < x;i++) {
-		matriz[i] = new Nodo*[y];
+		mat[i] = new Nodo*[y];
 	}
 ;	for (int i = 0; i < x; i++) {
 		for (int j = 0; j < y; j++) {
-			matriz[i][j] = new Nodo();
+			mat[i][j] = new Nodo();
 		}
 	}
 	for (int i = 0; i < x; i++) {
 		for (int j = 0; j < y; j++) {
 			if (i > 0 && j > 0 && i < x-1 && j < y-1) {
-				matriz[i][j]->setArriba(matriz[i - 1][j]);
-				matriz[i][j]->setAbajo(matriz[i + 1][j]);
-				matriz[i][j]->setDerecha(matriz[i][j + 1]);
-				matriz[i][j]->setIzquierda(matriz[i][j - 1]);
+				mat[i][j]->setArriba(mat[i - 1][j]);
+				mat[i][j]->setAbajo(mat[i + 1][j]);
+				mat[i][j]->setDerecha(mat[i][j + 1]);
+				mat[i][j]->setIzquierda(mat[i][j - 1]);
 				
 			}
 			else if (i == 0 && j < y) {
 				if (j == 0) {
-					matriz[i][j]->setAbajo(matriz[i + 1][j]);
-					matriz[i][j]->setDerecha(matriz[i][j + 1]);
+					mat[i][j]->setAbajo(mat[i + 1][j]);
+					mat[i][j]->setDerecha(mat[i][j + 1]);
 					
 				}
 				else if (j + 1 == y) {
-					matriz[i][j]->setAbajo(matriz[i + 1][j]);
-					matriz[i][j]->setIzquierda(matriz[i][j - 1]);
+					mat[i][j]->setAbajo(mat[i + 1][j]);
+					mat[i][j]->setIzquierda(mat[i][j - 1]);
 				
 				}
 				else {
-					matriz[i][j]->setIzquierda(matriz[i][j - 1]);
-					matriz[i][j]->setDerecha(matriz[i][j + 1]);
-					matriz[i][j]->setAbajo(matriz[i + 1][j]);
+					mat[i][j]->setIzquierda(mat[i][j - 1]);
+					mat[i][j]->setDerecha(mat[i][j + 1]);
+					mat[i][j]->setAbajo(mat[i + 1][j]);
 				
 				}
 			}
 			else if (i + 1 == x && j < y) {
 				if (j == 0) {
-					matriz[i][j]->setArriba(matriz[i - 1][j]);
-					matriz[i][j]->setDerecha(matriz[i][j + 1]);
+					mat[i][j]->setArriba(mat[i - 1][j]);
+					mat[i][j]->setDerecha(mat[i][j + 1]);
 					
 				}
 				else if (j + 1 == y) {
-					matriz[i][j]->setIzquierda(matriz[i][j - 1]);
-					matriz[i][j]->setArriba(matriz[i - 1][j]);
+					mat[i][j]->setIzquierda(mat[i][j - 1]);
+					mat[i][j]->setArriba(mat[i - 1][j]);
 					
 				}
 				else {
-					matriz[i][j]->setIzquierda(matriz[i][j - 1]);
-					matriz[i][j]->setDerecha(matriz[i][j + 1]);
-					matriz[i][j]->setArriba(matriz[i - 1][j]);
+					mat[i][j]->setIzquierda(mat[i][j - 1]);
+					mat[i][j]->setDerecha(mat[i][j + 1]);
+					mat[i][j]->setArriba(mat[i - 1][j]);
 					
 				}
 			}
 			else if (j == 0) {
-				matriz[i][j]->setAbajo(matriz[i + 1][j]);
-				matriz[i][j]->setDerecha(matriz[i][j + 1]);
-				matriz[i][j]->setArriba(matriz[i - 1][j]);
+				mat[i][j]->setAbajo(mat[i + 1][j]);
+				mat[i][j]->setDerecha(mat[i][j + 1]);
+				mat[i][j]->setArriba(mat[i - 1][j]);
 				
 			}
 			else if(j+1==y){
-				matriz[i][j]->setIzquierda(matriz[i][j - 1]);
-				matriz[i][j]->setAbajo(matriz[i + 1][j]);
-				matriz[i][j]->setArriba(matriz[i - 1][j]);
+				mat[i][j]->setIzquierda(mat[i][j - 1]);
+				mat[i][j]->setAbajo(mat[i + 1][j]);
+				mat[i][j]->setArriba(mat[i - 1][j]);
 				
 			}
 		}
 
 	}
-	mat = matriz;
 }
 
 
-void jugador::crearNivel(char map[][9],int x,int y) {
+void jugador::crearNivel(char map[][9], int x, int y) {
 	for (int i = 0; i < x; i++) {
 		for (int j = 0; j < y; j++) {
+
 			mat[i][j]->setId(map[i][j]);
+			if (map[i][j] == '@') {
+				ini = mat[i][j];
+			}
 		}
 	}
 
@@ -110,8 +114,7 @@ void jugador::MenuInicio()
 	case 1: {
 		jugador* j1 = new jugador();
 		system("cls");
-		j1->Nivel1();
-		
+		j1->Nivel1();		
 		break;
 	}
 	case 2: {
@@ -124,25 +127,34 @@ void jugador::MenuInicio()
 	}
 }
 
-void jugador::Nivel1()
+void jugador::gotoxy(int x, int y)
 {
-	jugador* J1 = new jugador();
-	J1->crearLista(8, 9);
+	HANDLE hCon;
+	hCon = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD dwPos;
+	dwPos.X = x;
+	dwPos.Y = y;
+	SetConsoleCursorPosition(hCon, dwPos);
+}
+jugador* J1 = new jugador();
+void jugador::Nivel1()
+{	
 	char map[8][9] =
 	{
-		{ ' ', ' ', '#', '#', '#', ' ', ' ',' ',' '},
-		{ ' ', ' ', '#', '.', '#', ' ', ' ',' ',' '},
-		{ ' ', ' ', '#', ' ', '#', '#', '#','#',' '},
-		{ '#', '#', '#', '$', ' ', '$', '.','#',' '},
-		{ '#', '.', ' ', '$', '@', '#', '#','#',' '},
-		{ '#', '#', '#', '#', '$', '#', ' ',' ',' '},
-		{ ' ', ' ', ' ', '#', '.', '#', ' ',' ',' '},
-		{ ' ', ' ', ' ', '#', '#', '#', ' ',' ',' '}
+		{' ',' ','#','#','#',' ',' ',' ',' '},
+		{' ',' ','#','.','#',' ',' ',' ',' '},
+		{' ',' ','#',' ','#','#','#','#',' '},
+		{'#','#','#','$',' ','$','.','#',' '},
+		{'#','.',' ','$','@','#','#','#',' '},
+		{'#','#','#','#','$','#',' ',' ',' '},
+		{' ',' ',' ','#','.','#',' ',' ',' '},
+		{' ',' ',' ','#','#','#',' ',' ',' '}
 	};
+
+	J1->crearLista(8, 9);
 	cout << "MAPA 1" << endl << endl;
 	J1->crearNivel(map, 8, 9);
 	Movimientos();
-
 }
 
 void jugador::Movimientos()
@@ -152,33 +164,196 @@ void jugador::Movimientos()
 #define RIGTH 77
 #define LEFT 75
 	
-	for (int i = 0; i < 8; i++) {
-		for (int j = 0; j < 9; j++) {
-			if (mat[i][j]->getId() =='@') {
-				cout << "encontrado";
-			}
-		}
-	}
-	while (1) {
+	while (1) {	
+		J1->ini->setX(X); J1->ini->setY(Y);
+		gotoxy(J1->ini->getX(), J1->ini->getY());
+	
 		if (_kbhit()) {
 			char tecla = _getch();
 			switch (tecla) {
-			case UP: {
-			
-				cout << "ARRIBA";
+			case UP: {		
+			if(J1->ini->getArriba()!=NULL)
+				if (J1->ini->getArriba()->getId()==' '){
+					J1->ini = J1->ini->getArriba();
+					J1->ini->setId('@');
+					J1->ini->getAbajo()->setId(' ');			
+					Y--;
+					J1->ini->setX(X); J1->ini->setY(Y);
+					cout << J1->ini->getAbajo()->getId();
 				
+					gotoxy(J1->ini->getX() , J1->ini->getY());
+					cout << J1->ini->getId();
+				}		
+				else if (J1->ini->getArriba()->getId() == '$' && J1->ini->getArriba()->getArriba()->getId() != '#' && J1->ini->getArriba()->getArriba()->getId() != '$') {
+					if (J1->ini->getArriba()->getArriba()->getId() == '.') {
+						J1->ini = J1->ini->getArriba();
+						J1->ini->setId('@');
+						J1->ini->getAbajo()->setId(' ');
+						J1->ini->getArriba()->setId('!');
+						Y--;
+						J1->ini->setX(X); J1->ini->setY(Y);
+						cout << J1->ini->getAbajo()->getId();
+						gotoxy(J1->ini->getX(), J1->ini->getY());
+						cout << J1->ini->getId();
+						gotoxy(J1->ini->getX(), J1->ini->getY() - 1);
+						cout << J1->ini->getArriba()->getId();
+					}
+					else {
+						if (J1->ini->getArriba()->getArriba()->getId() == ' ') {
+							J1->ini = J1->ini->getArriba();
+							J1->ini->setId('@');
+							J1->ini->getAbajo()->setId(' ');
+							J1->ini->getArriba()->setId('$');
+							Y--;
+							J1->ini->setX(X); J1->ini->setY(Y);
+							cout << J1->ini->getAbajo()->getId();
+							gotoxy(J1->ini->getX(), J1->ini->getY());
+							cout << J1->ini->getId();
+							gotoxy(J1->ini->getX(), J1->ini->getY() - 1);
+							cout << J1->ini->getArriba()->getId();
+						}
+					}
+				}
 				break;
 			}
 			case DOWN: {
-				cout << "ABAJO";
+				if (J1->ini->getAbajo() != NULL)
+					if (J1->ini->getAbajo()->getId() == ' ') {
+						J1->ini = J1->ini->getAbajo();
+						J1->ini->setId('@');
+						J1->ini->getArriba()->setId(' ');					
+						Y++;
+						J1->ini->setX(X); J1->ini->setY(Y);
+						cout << J1->ini->getArriba()->getId();
+						gotoxy(J1->ini->getX(), J1->ini->getY());
+						cout << J1->ini->getId();
+					}
+					else if (J1->ini->getAbajo()->getId() == '$' && J1->ini->getAbajo()->getAbajo()->getId() != '#' && J1->ini->getAbajo()->getAbajo()->getId() != '$') {
+						if (J1->ini->getAbajo()->getAbajo()->getId() == '.') {
+							J1->ini = J1->ini->getAbajo();
+							J1->ini->setId('@');
+							J1->ini->getArriba()->setId(' ');
+							J1->ini->getAbajo()->setId('!');
+							Y++;
+							J1->ini->setX(X); J1->ini->setY(Y);
+							cout << J1->ini->getArriba()->getId();
+							gotoxy(J1->ini->getX(), J1->ini->getY());
+							cout << J1->ini->getId();
+							gotoxy(J1->ini->getX(), J1->ini->getY()+1);
+							cout << J1->ini->getAbajo()->getId();
+						 }
+						else {
+							if (J1->ini->getAbajo()->getAbajo()->getId() == ' ') {
+								J1->ini = J1->ini->getAbajo();
+								J1->ini->setId('@');
+								J1->ini->getArriba()->setId(' ');
+								J1->ini->getAbajo()->setId('$');
+								Y++;
+								J1->ini->setX(X); J1->ini->setY(Y);
+								cout << J1->ini->getArriba()->getId();
+								gotoxy(J1->ini->getX(), J1->ini->getY());
+								cout << J1->ini->getId();
+								gotoxy(J1->ini->getX(), J1->ini->getY() + 1);
+								cout << J1->ini->getAbajo()->getId();
+							}
+						}
+					}
+			
 				break;
 			}
 			case RIGTH:{
-				cout << "DERECHA";
+				if (J1->ini->getDerecha() != NULL)
+					if (J1->ini->getDerecha()->getId() == ' ') {
+						J1->ini = J1->ini->getDerecha();
+						J1->ini->setId('@');
+						J1->ini->getIzquierda()->setId(' ');
+						X++;
+						J1->ini->setX(X); J1->ini->setY(Y);
+						cout << J1->ini->getIzquierda()->getId();
+						gotoxy(J1->ini->getX(), J1->ini->getY());
+						cout << J1->ini->getId();
+						
+					}
+					else if (J1->ini->getDerecha()->getId() == '$' && J1->ini->getDerecha()->getDerecha()->getId() != '#' && J1->ini->getDerecha()->getDerecha()->getId() != '$') {
+						if (J1->ini->getDerecha()->getDerecha()->getId() == '.') {
+							J1->ini = J1->ini->getDerecha();
+							J1->ini->setId('@');
+							J1->ini->getIzquierda()->setId(' ');
+							J1->ini->getDerecha()->setId('!');
+							X++;
+							X++;
+							J1->ini->setX(X); J1->ini->setY(Y);
+							cout << J1->ini->getIzquierda()->getId();
+							gotoxy(J1->ini->getX(), J1->ini->getY());
+							cout << J1->ini->getId();
+							gotoxy(J1->ini->getX()+3, J1->ini->getY());
+							cout << J1->ini->getDerecha()->getId();
+						}
+						else {
+							if (J1->ini->getDerecha()->getDerecha()->getId() == ' ') {
+								J1->ini = J1->ini->getDerecha();
+								J1->ini->setId('@');
+								J1->ini->getIzquierda()->setId(' ');
+								J1->ini->getDerecha()->setId('$');
+								X++;
+								X++;
+								J1->ini->setX(X); J1->ini->setY(Y);
+								cout << J1->ini->getIzquierda()->getId();
+								gotoxy(J1->ini->getX(), J1->ini->getY());
+								cout << J1->ini->getId();
+								gotoxy(J1->ini->getX()+3, J1->ini->getY());
+								cout << J1->ini->getDerecha()->getId();
+							}
+						}
+					}
 				break;
 			}
 			case LEFT:
-				cout << "IZQUIERDA";
+				if (J1->ini->getIzquierda() != NULL)
+					if (J1->ini->getIzquierda()->getId() == ' ') {
+						J1->ini = J1->ini->getIzquierda();
+						J1->ini->setId('@');
+						J1->ini->getDerecha()->setId(' ');
+						X--;
+						
+						J1->ini->setX(X); J1->ini->setY(Y);
+						cout << J1->ini->getDerecha()->getId();
+						gotoxy(J1->ini->getX(), J1->ini->getY());
+						cout << J1->ini->getId();
+					}
+					else if (J1->ini->getIzquierda()->getId() == '$' && J1->ini->getIzquierda()->getIzquierda()->getId() != '#' && J1->ini->getIzquierda()->getIzquierda()->getId() != '$') {
+						if (J1->ini->getIzquierda()->getIzquierda()->getId() == '.') {
+							J1->ini = J1->ini->getIzquierda();
+							J1->ini->setId('@');
+							J1->ini->getDerecha()->setId(' ');
+							J1->ini->getIzquierda()->setId('!');
+							X--;
+							X--;
+							J1->ini->setX(X); J1->ini->setY(Y);
+							cout << J1->ini->getDerecha()->getId();
+							gotoxy(J1->ini->getX(), J1->ini->getY());
+							cout << J1->ini->getId();
+							gotoxy(J1->ini->getX() - 3, J1->ini->getY());
+							cout << J1->ini->getIzquierda()->getId();
+						}
+						else {
+							if (J1->ini->getIzquierda()->getIzquierda()->getId() == ' ') {
+								cout << "Yep";
+								J1->ini = J1->ini->getIzquierda();
+								J1->ini->setId('@');
+								J1->ini->getDerecha()->setId(' ');
+								J1->ini->getIzquierda()->setId('$');
+								X--;
+								J1->ini->setX(X); J1->ini->setY(Y);
+								cout << J1->ini->getDerecha()->getId();
+								gotoxy(J1->ini->getX(), J1->ini->getY());
+								cout << J1->ini->getId();
+								gotoxy(J1->ini->getX() - 1, J1->ini->getY());
+								cout << J1->ini->getIzquierda()->getId();
+							}
+						}
+					}
+
 				break;
 			}
 			

@@ -5,16 +5,9 @@
 #include <Windows.h>
 #include "jugador.h"
 #include "Nodo.h"
+#include <conio.h>
 using namespace std;
 
-void gotoxy(int x, int y) {
-	HANDLE hCon;
-	hCon = GetStdHandle(STD_OUTPUT_HANDLE);
-	COORD dwPos;
-	dwPos.X = x;
-	dwPos.Y = y;
-	SetConsoleCursorPosition(hCon,dwPos);
-}
 int main()
 {
 	jugador* j = new jugador();
