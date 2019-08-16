@@ -112,7 +112,7 @@ void jugador::MenuInicio()
 	case 1: {
 		jugador* j1 = new jugador();
 		system("cls");
-		j1->Nivel1();		
+		j1->Nivel2();		
 		break;
 	}
 	case 2: {
@@ -402,7 +402,7 @@ void jugador::Movimientos(int X, int Y)
 									cout << J1->ini->getAbajo()->getId();
 									gotoxy(J1->ini->getX(), J1->ini->getY());
 									cout << J1->ini->getId();
-									sobrepunto = false;
+									
 								}
 								else {
 									
