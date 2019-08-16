@@ -527,7 +527,8 @@ void jugador::Movimientos(int X, int Y)
 								gotoxy(J1->ini->getX(), J1->ini->getY());
 								cout << J1->ini->getId();							
 								if (J1->ini->getAbajo()->getId() == '.') {
-									SobrepuntoAbajo = true;								
+									SobrepuntoAbajo = true;		
+									SobrepuntoArriba = true;
 								}
 								else {
 									SobrepuntoAbajo = false;
@@ -543,7 +544,7 @@ void jugador::Movimientos(int X, int Y)
 								gotoxy(J1->ini->getX(), J1->ini->getY());
 								cout << J1->ini->getId();
 								SobrepuntoAbajo = true;	
-								
+								SobrepuntoArriba = true;
 							}
 						}
 
