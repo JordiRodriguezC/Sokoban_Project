@@ -165,7 +165,7 @@ void jugador::Nivel2()
 		{ '#', ' ', '$', ' ', '#', ' ', '#','.' , '#'},
 		{ '#', '#', '#', '!', '#', '#', '#','.' , '#'},
 		{ ' ', '#', '#', ' ', '@', ' ', ' ','.' , '#'},
-		{ ' ', '#', ' ', '$', ' ', '#', ' ',' ' , '#'},
+		{ ' ', '#', ' ', '$', '.', '#', ' ',' ' , '#'},
 		{ ' ', '#', ' ', ' ', ' ', '#', '#','#' , '#'},
 		{ ' ', '#', '#', '#', '#', '#', ' ',' ' , ' '}
 	};
@@ -237,7 +237,7 @@ void jugador::Movimientos(int X, int Y)
 #define UP 72
 #define RIGTH 77
 #define LEFT 75
-	bool SobrepuntoArrbiba = false;
+	bool SobrepuntoArriba = false;
 	bool SobrepuntoAbajo = false;
 	bool SobrepuntoDerecha = false;
 	bool SobrepuntoIzquierda = false;
@@ -250,7 +250,7 @@ void jugador::Movimientos(int X, int Y)
 			case UP: {		
 				if (J1->ini->getArriba() != NULL) {
 					if (J1->ini->getArriba()->getId() == ' ') {
-						if (SobrepuntoArrbiba) {
+						if (SobrepuntoArriba) {
 							J1->ini = J1->ini->getArriba();
 							J1->ini->setId('@');
 							J1->ini->getAbajo()->setId('.');
@@ -259,7 +259,7 @@ void jugador::Movimientos(int X, int Y)
 							cout << J1->ini->getAbajo()->getId();
 							gotoxy(J1->ini->getX(), J1->ini->getY());
 							cout << J1->ini->getId();
-							SobrepuntoArrbiba = false;
+							SobrepuntoArriba = false;
 						}
 						else {
 							J1->ini = J1->ini->getArriba();
@@ -274,7 +274,7 @@ void jugador::Movimientos(int X, int Y)
 					}
 					else if (J1->ini->getArriba()->getId() == '$') {
 						if (J1->ini->getArriba()->getArriba()->getId() == '.') {
-							if (SobrepuntoArrbiba) {
+							if (SobrepuntoArriba) {
 								J1->ini = J1->ini->getArriba();
 								J1->ini->setId('@');
 								J1->ini->getAbajo()->setId('.');
@@ -283,7 +283,7 @@ void jugador::Movimientos(int X, int Y)
 								cout << J1->ini->getAbajo()->getId();
 								gotoxy(J1->ini->getX(), J1->ini->getY());
 								cout << J1->ini->getId();
-								SobrepuntoArrbiba = false;
+								SobrepuntoArriba = false;
 							}
 							else {
 								J1->ini = J1->ini->getArriba();
@@ -297,11 +297,12 @@ void jugador::Movimientos(int X, int Y)
 								cout << J1->ini->getId();
 								gotoxy(J1->ini->getX(), J1->ini->getY() - 1);
 								cout << J1->ini->getArriba()->getId();
+								
 							}
 						}
 						else {
 							if (J1->ini->getArriba()->getArriba()->getId() == ' ') {
-								if (SobrepuntoArrbiba) {
+								if (SobrepuntoArriba) {
 									J1->ini = J1->ini->getArriba();
 									J1->ini->setId('@');
 									J1->ini->getArriba()->setId('$');
@@ -313,7 +314,7 @@ void jugador::Movimientos(int X, int Y)
 									cout << J1->ini->getId();
 									gotoxy(J1->ini->getX(), J1->ini->getY()-1);
 									cout << J1->ini->getArriba()->getId();
-									SobrepuntoArrbiba = false;
+									SobrepuntoArriba = false;
 								}
 								else {
 									J1->ini = J1->ini->getArriba();
@@ -334,7 +335,7 @@ void jugador::Movimientos(int X, int Y)
 					else {
 						if (J1->ini->getArriba()->getId() == '!') {
 							if (J1->ini->getArriba()->getArriba()->getId() == ' ') {
-								if (SobrepuntoArrbiba) {
+								if (SobrepuntoArriba) {
 									J1->ini = J1->ini->getArriba();
 									J1->ini->setId('@');
 									J1->ini->getAbajo()->setId('.');
@@ -343,11 +344,12 @@ void jugador::Movimientos(int X, int Y)
 									cout << J1->ini->getAbajo()->getId();
 									gotoxy(J1->ini->getX(), J1->ini->getY());
 									cout << J1->ini->getId();
-									SobrepuntoArrbiba = false;
+									SobrepuntoArriba = false;
 								}
 								else {
 									J1->ini = J1->ini->getArriba();
-									SobrepuntoArrbiba = true;
+									SobrepuntoArriba = true;
+									SobrepuntoAbajo = true;
 									J1->ini->setId('@');
 									J1->ini->getArriba()->setId('$');
 									J1->ini->getAbajo()->setId(' ');
@@ -362,7 +364,7 @@ void jugador::Movimientos(int X, int Y)
 							}
 							else {
 								if (J1->ini->getArriba()->getArriba()->getId() == '.') {
-									if (SobrepuntoArrbiba) {
+									if (SobrepuntoArriba) {
 										J1->ini = J1->ini->getArriba();
 										J1->ini->setId('@');
 										J1->ini->getAbajo()->setId('.');
@@ -374,11 +376,12 @@ void jugador::Movimientos(int X, int Y)
 										cout << J1->ini->getId();
 										gotoxy(J1->ini->getX(), J1->ini->getY() - 1);
 										cout << J1->ini->getArriba()->getId();
-										SobrepuntoArrbiba = false;
+										SobrepuntoArriba = false;
 									}
 									else {
 										J1->ini = J1->ini->getArriba();
-										SobrepuntoArrbiba = true;
+										SobrepuntoArriba = true;
+										SobrepuntoAbajo = true;
 										J1->ini->setId('@');
 										J1->ini->getArriba()->setId('!');
 										J1->ini->getAbajo()->setId(' ');
@@ -395,7 +398,7 @@ void jugador::Movimientos(int X, int Y)
 						}
 						else {
 							if (J1->ini->getArriba()->getId() == '.') {
-								if (SobrepuntoArrbiba) {
+								if (SobrepuntoArriba) {
 									J1->ini = J1->ini->getArriba();
 									J1->ini->setId('@');
 									J1->ini->getAbajo()->setId('.');
@@ -404,15 +407,16 @@ void jugador::Movimientos(int X, int Y)
 									cout << J1->ini->getAbajo()->getId();
 									gotoxy(J1->ini->getX(), J1->ini->getY());
 									cout << J1->ini->getId();
-									SobrepuntoArrbiba = false;
+									SobrepuntoArriba = false;
 									if (J1->ini->getArriba()->getId() == '.') {
-										SobrepuntoArrbiba = true;
+										SobrepuntoArriba = true;
+										SobrepuntoAbajo = true;
 									}
 								}
-								else {
-									
+								else {								
 									J1->ini = J1->ini->getArriba();
-									SobrepuntoArrbiba = true;
+									SobrepuntoArriba = true;
+									SobrepuntoAbajo = true;
 									J1->ini->setId('@');
 									J1->ini->getAbajo()->setId(' ');
 									Y--;
@@ -430,35 +434,47 @@ void jugador::Movimientos(int X, int Y)
 			case DOWN: {
 				if (J1->ini->getAbajo() != NULL) {
 					if (J1->ini->getAbajo()->getId() == ' ') {
-						J1->ini = J1->ini->getAbajo();
-						J1->ini->setId('@');
-						J1->ini->getArriba()->setId(' ');
-						Y++;
-						J1->ini->setX(X); J1->ini->setY(Y);
-						cout << J1->ini->getArriba()->getId();
-						gotoxy(J1->ini->getX(), J1->ini->getY());
-						cout << J1->ini->getId();
-					}
-					else if (J1->ini->getAbajo()->getId() == '$') {
-						if (J1->ini->getAbajo()->getAbajo()->getId() == '.') {
+						if (SobrepuntoAbajo) {
 							J1->ini = J1->ini->getAbajo();
 							J1->ini->setId('@');
-							J1->ini->getArriba()->setId(' ');
-							J1->ini->getAbajo()->setId('!');
+							J1->ini->getArriba()->setId('.');
 							Y++;
 							J1->ini->setX(X); J1->ini->setY(Y);
 							cout << J1->ini->getArriba()->getId();
 							gotoxy(J1->ini->getX(), J1->ini->getY());
 							cout << J1->ini->getId();
-							gotoxy(J1->ini->getX(), J1->ini->getY() + 1);
-							cout << J1->ini->getAbajo()->getId();
+							SobrepuntoAbajo = false;	
+
 						}
 						else {
-							if (J1->ini->getAbajo()->getAbajo()->getId() == ' ') {
+							J1->ini = J1->ini->getAbajo();
+							J1->ini->setId('@');
+							J1->ini->getArriba()->setId(' ');
+							Y++;
+							J1->ini->setX(X); J1->ini->setY(Y);
+							cout << J1->ini->getArriba()->getId();
+							gotoxy(J1->ini->getX(), J1->ini->getY());
+							cout << J1->ini->getId();
+						}
+					}
+					else if (J1->ini->getAbajo()->getId() == '$') {
+						if (J1->ini->getAbajo()->getAbajo()->getId() == '.') {
+							if (SobrepuntoAbajo) {
+								J1->ini = J1->ini->getAbajo();
+								J1->ini->setId('@');
+								J1->ini->getArriba()->setId('.');
+								Y++;
+								J1->ini->setX(X); J1->ini->setY(Y);
+								cout << J1->ini->getArriba()->getId();
+								gotoxy(J1->ini->getX(), J1->ini->getY());
+								cout << J1->ini->getId();
+								SobrepuntoAbajo = false;							
+							}
+							else {
 								J1->ini = J1->ini->getAbajo();
 								J1->ini->setId('@');
 								J1->ini->getArriba()->setId(' ');
-								J1->ini->getAbajo()->setId('$');
+								J1->ini->getAbajo()->setId('!');
 								Y++;
 								J1->ini->setX(X); J1->ini->setY(Y);
 								cout << J1->ini->getArriba()->getId();
@@ -466,6 +482,134 @@ void jugador::Movimientos(int X, int Y)
 								cout << J1->ini->getId();
 								gotoxy(J1->ini->getX(), J1->ini->getY() + 1);
 								cout << J1->ini->getAbajo()->getId();
+							
+								
+							}
+						}
+						else {
+							if (J1->ini->getAbajo()->getAbajo()->getId() == ' ') {
+								if (SobrepuntoAbajo) {
+									J1->ini = J1->ini->getAbajo();
+									J1->ini->setId('@');
+									J1->ini->getArriba()->setId('.');
+									Y++;
+									J1->ini->setX(X); J1->ini->setY(Y);
+									cout << J1->ini->getArriba()->getId();
+									gotoxy(J1->ini->getX(), J1->ini->getY());
+									cout << J1->ini->getId();
+									SobrepuntoAbajo = false;
+								}
+								else {
+									J1->ini = J1->ini->getAbajo();
+									J1->ini->setId('@');
+									J1->ini->getArriba()->setId(' ');
+									J1->ini->getAbajo()->setId('$');
+									Y++;
+									J1->ini->setX(X); J1->ini->setY(Y);
+									cout << J1->ini->getArriba()->getId();
+									gotoxy(J1->ini->getX(), J1->ini->getY());
+									cout << J1->ini->getId();
+									gotoxy(J1->ini->getX(), J1->ini->getY() + 1);
+									cout << J1->ini->getAbajo()->getId();
+								}
+							}
+						}
+					}
+					else {
+						if (J1->ini->getAbajo()->getId()=='.') {
+							if (SobrepuntoAbajo) {
+								J1->ini = J1->ini->getAbajo();
+								J1->ini->setId('@');
+								J1->ini->getArriba()->setId('.');
+								Y++;
+								J1->ini->setX(X); J1->ini->setY(Y);
+								cout << J1->ini->getArriba()->getId();
+								gotoxy(J1->ini->getX(), J1->ini->getY());
+								cout << J1->ini->getId();							
+								if (J1->ini->getAbajo()->getId() == '.') {
+									SobrepuntoAbajo = true;								
+								}
+								else {
+									SobrepuntoAbajo = false;
+								}
+							}
+							else {
+								J1->ini = J1->ini->getAbajo();
+								J1->ini->setId('@');
+								J1->ini->getArriba()->setId(' ');
+								Y++;
+								J1->ini->setX(X); J1->ini->setY(Y);
+								cout << J1->ini->getArriba()->getId();
+								gotoxy(J1->ini->getX(), J1->ini->getY());
+								cout << J1->ini->getId();
+								SobrepuntoAbajo = true;	
+								
+							}
+						}
+
+					}
+				}
+				else {
+					if (J1->ini->getAbajo()->getId() == '!') {
+						if (J1->ini->getAbajo()->getAbajo()->getId() == ' ') {
+							if (SobrepuntoAbajo) {
+								J1->ini = J1->ini->getAbajo();
+								J1->ini->setId('@');
+								J1->ini->getArriba()->setId('.');
+								Y++;
+								J1->ini->setX(X); J1->ini->setY(Y);
+								cout << J1->ini->getArriba()->getId();
+								gotoxy(J1->ini->getX(), J1->ini->getY());
+								cout << J1->ini->getId();
+								SobrepuntoAbajo = false;
+							}
+							else {
+								J1->ini = J1->ini->getAbajo();
+								SobrepuntoAbajo = true;
+								SobrepuntoArriba = true;
+								J1->ini->setId('@');
+								J1->ini->getAbajo()->setId('$');
+								J1->ini->getArriba()->setId(' ');
+								Y++;
+								J1->ini->setX(X); J1->ini->setY(Y);
+								cout << J1->ini->getArriba()->getId();
+								gotoxy(J1->ini->getX(), J1->ini->getY());
+								cout << J1->ini->getId();
+								gotoxy(J1->ini->getX(), J1->ini->getY() + 1);
+								cout << J1->ini->getAbajo()->getId();
+							}
+						}
+						else {
+							if (J1->ini->getAbajo()->getAbajo()->getId() == '.') {
+								if (SobrepuntoAbajo) {
+									J1->ini = J1->ini->getAbajo();
+									J1->ini->setId('@');
+									J1->ini->getArriba()->setId('.');
+									J1->ini->getAbajo()->setId('!');
+									Y++;
+									J1->ini->setX(X); J1->ini->setY(Y);
+									cout << J1->ini->getArriba()->getId();
+									gotoxy(J1->ini->getX(), J1->ini->getY());
+									cout << J1->ini->getId();
+									gotoxy(J1->ini->getX(), J1->ini->getY() + 1);
+									cout << J1->ini->getAbajo()->getId();
+									SobrepuntoAbajo = false;
+								}
+								else {
+									J1->ini = J1->ini->getAbajo();
+									SobrepuntoAbajo = true;
+									SobrepuntoArriba = true;
+									J1->ini->setId('@');
+									J1->ini->getAbajo()->setId('!');
+									J1->ini->getArriba()->setId(' ');
+									Y++;
+									J1->ini->setX(X); J1->ini->setY(Y);
+									cout << J1->ini->getArriba()->getId();
+									gotoxy(J1->ini->getX(), J1->ini->getY());
+									cout << J1->ini->getId();
+									gotoxy(J1->ini->getX(), J1->ini->getY() + 1);
+									cout << J1->ini->getAbajo()->getId();
+								}
 							}
 						}
 					}
