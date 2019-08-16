@@ -1,5 +1,5 @@
 #pragma once
-using namespace syd;
+using namespace std;
 class Nodo {
 
 private:
