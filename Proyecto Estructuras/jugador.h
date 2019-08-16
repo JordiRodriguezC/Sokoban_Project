@@ -16,6 +16,9 @@ public:
 	void gotoxy(int x, int y);
 	void Nivel1();
 	void Nivel2();
+	void Nivel3();
+	void Nivel4();
+	void Nivel5();
 	void Movimientos(int X, int Y);
 };
 
