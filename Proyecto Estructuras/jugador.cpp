@@ -349,6 +349,7 @@ void jugador::Movimientos(int X, int Y)
 									sobrepunto = false;
 								}
 								else {
+									
 									J1->ini = J1->ini->getArriba();
 									sobrepunto = true;
 									J1->ini->setId('@');
