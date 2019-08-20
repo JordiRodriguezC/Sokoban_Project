@@ -24,8 +24,23 @@ public:
 	void Nivel4();
 	void Nivel5();
 	void Movimientos(int X, int Y);
-	void NivelLogrado(int ContCajas, int fila);
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
