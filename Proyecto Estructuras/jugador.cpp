@@ -311,6 +311,7 @@ void jugador::Movimientos(int X, int Y)
 #define UP 72
 #define RIGTH 77
 #define LEFT 75
+#define RESTART 114
 	int ycont = 0;
 	int ContCajas = 0;
 	while (1) {
@@ -490,6 +491,30 @@ void jugador::Movimientos(int X, int Y)
 					J1->MenuNivelPasado();
 				}
 				break;
+			}
+
+			case RESTART: {
+				system("cls");
+				switch (nivel) {
+				case 2: {
+					J1->Nivel2();
+					break;
+				}
+				case 3: {
+					J1->Nivel3();
+					break;
+				}
+				case 4: {
+					J1->Nivel4();
+					break;
+				}
+				case 5: {
+					J1->Nivel5();
+					break;
+				}
+						break;
+				}
+
 			}
 			case RIGTH: {
 				
