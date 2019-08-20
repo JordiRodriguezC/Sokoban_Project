@@ -14,7 +14,7 @@ void jugador::crearLista(int x, int y) {
 	for (int i = 0; i < x; i++) {
 		mat[i] = new Nodo * [y];
 	}
-	;
+
 	for (int i = 0; i < x; i++) {
 		for (int j = 0; j < y; j++) {
 			mat[i][j] = new Nodo();
@@ -87,7 +87,7 @@ void jugador::crearNivel(char map[][9], int x, int y) {
 	for (int i = 0; i < x; i++) {
 		for (int j = 0; j < y; j++) {
 
-			if (map[i][j]=='$'|| map[i][j] == '!') {
+			if (map[i][j] == '$' || map[i][j] == '!') {
 				J1->PilaContadora.push('$');
 			}
 			if (map[i][j] == '@') {
@@ -117,6 +117,48 @@ void jugador::crearNivel(char map[][9], int x, int y) {
 
 }
 
+void jugador::MenuNivelPasado() {
+	system("cls");
+	int Op;
+	cout << "\t\t\t############# MENU #############\n\n";
+	cout << "\t\t\t1- Siguiente Nivel\n";
+	cout << "\t\t\t2- Repeticion\n";
+	cout << "\t\t\t3- Salir\n\n";
+	cin >> Op;
+	switch (Op) {
+	case 1: {
+		nivel++;
+		system("cls");
+		switch (nivel) {
+		case 2: {
+			J1->Nivel2();
+			break;
+		}
+		case 3: {
+			J1->Nivel3();
+			break;
+		}
+		case 4: {
+			J1->Nivel4();
+			break;
+		}
+		case 5: {
+			J1->Nivel5();
+			break;
+		}
+		}
+		break;
+	}
+	case 2: {
+		break;
+	}
+	case 3: {
+		exit(1);
+	}
+
+	}
+}
+
 void jugador::MenuInicio()
 {
 	int Op;
@@ -129,7 +171,7 @@ void jugador::MenuInicio()
 	case 1: {
 		jugador* j1 = new jugador();
 		system("cls");
-		j1->Nivel5();
+		j1->Nivel1();
 		break;
 	}
 	case 2: {
@@ -228,7 +270,7 @@ void jugador::Nivel4()
 		{ '#', '#', '#', '#', '#', '#','#','#',' '}
 	};
 	J1->crearLista(8, 9);
-	cout<< "MAPA 4" << endl << endl;
+	cout << "MAPA 4" << endl << endl;
 	J1->crearNivel(map4, 8, 9);
 	fila = 8;
 	Movimientos(6, 4);
@@ -253,8 +295,35 @@ void jugador::Nivel5()
 	Movimientos(2, 5);
 }
 
+void jugador::NivelLogrado(int ContCajas, int fila) {
+	for (int i = 0; i < fila; i++) {
+		for (int j = 0; j < 9; j++) {
+			if (ContCajas < J1->PilaContadora.size()) {
+				if (J1->mat[i][j]->getId() == '!') {
+					ContCajas++;
+					break;
+				}
+			}
+		}
+	}
+	for (int i = 0; i < fila; i++) {
+		for (int j = 0; j < 9; j++) {
+			if (ContCajas > 0) {
+				if (J1->mat[i][j]->getId() == '$') {
+					ContCajas--;
+				}
+			}
+		}
+	}
+	if (J1->PilaContadora.size() == ContCajas) {
+		J1->MenuNivelPasado();
+	}
+
+}
+
 void jugador::Movimientos(int X, int Y)
 {
+#define SALIR 115
 #define DOWN 80
 #define UP 72
 #define RIGTH 77
@@ -268,31 +337,9 @@ void jugador::Movimientos(int X, int Y)
 		if (_kbhit()) {
 			char tecla = _getch();
 			switch (tecla) {
-			
-			case UP: {			
-				for (int i = 0; i < fila; i++) {
-					for (int j = 0; j < 9; j++) {
-						if (ContCajas<J1->PilaContadora.size()) {
-							if (J1->mat[i][j]->getId() == '!') {
-								ContCajas++;
-								break;
-							}
-						}
-					}
-				}
-				for (int i = 0; i < fila; i++) {
-					for (int j = 0; j < 9; j++) {
-						if (ContCajas > 0) {
-							if (J1->mat[i][j]->getId() == '$') {
-								ContCajas--;
-							}
-						}
-					}
-				}
-				if (J1->PilaContadora.size() == ContCajas) {
-					cout << "NIVEL SUPERADO";
-				}
-				
+
+			case UP: {
+
 				if (J1->ini->getArriba() != NULL) {
 					if (J1->ini->getArriba()->getId() == ' ' || J1->ini->getArriba()->getId() == '.') {
 						J1->ini = J1->ini->getArriba();
@@ -316,11 +363,11 @@ void jugador::Movimientos(int X, int Y)
 							if (J1->ini->getArriba()->getArriba()->getId() == ' ' || J1->ini->getArriba()->getArriba()->getId() == '.') {
 								if (J1->ini->getArriba()->getArriba()->getId() == ' ') {
 									J1->ini->getArriba()->getArriba()->setId('$');
-									
+
 								}
 								else {
 									J1->ini->getArriba()->getArriba()->setId('!');
-									
+
 								}
 								J1->ini = J1->ini->getArriba();
 								J1->ini->setId('@');
@@ -347,33 +394,20 @@ void jugador::Movimientos(int X, int Y)
 						}
 					}
 				}
-				
-				
+
+				J1->NivelLogrado(ContCajas, fila);
+				break;
+			}
+
+			case SALIR: {
+
+				system("cls");
+				J1->MenuInicio();
+
 				break;
 			}
 			case DOWN: {
-				for (int i = 0; i < fila; i++) {
-					for (int j = 0; j < 9; j++) {
-						if (ContCajas < J1->PilaContadora.size()) {
-							if (J1->mat[i][j]->getId() == '!') {
-								ContCajas++;
-								break;
-							}
-						}
-					}
-				}
-				for (int i = 0; i < fila; i++) {
-					for (int j = 0; j < 9; j++) {
-						if (ContCajas > 0) {
-							if (J1->mat[i][j]->getId() == '$') {
-								ContCajas--;
-							}
-						}
-					}
-				}
-				if (J1->PilaContadora.size() == ContCajas) {
-					cout << "NIVEL SUPERADO";
-				}
+
 				if (J1->ini->getAbajo() != NULL) {
 					if (J1->ini->getAbajo()->getId() == ' ' || J1->ini->getAbajo()->getId() == '.') {
 						J1->ini = J1->ini->getAbajo();
@@ -397,11 +431,11 @@ void jugador::Movimientos(int X, int Y)
 							if (J1->ini->getAbajo()->getAbajo()->getId() == ' ' || J1->ini->getAbajo()->getAbajo()->getId() == '.') {
 								if (J1->ini->getAbajo()->getAbajo()->getId() == ' ') {
 									J1->ini->getAbajo()->getAbajo()->setId('$');
-									
+
 								}
 								else {
 									J1->ini->getAbajo()->getAbajo()->setId('!');
-									
+
 								}
 
 								if (J1->ini->getPosIniID() == '.') {
@@ -430,32 +464,11 @@ void jugador::Movimientos(int X, int Y)
 						}
 					}
 				}
-			
+				J1->NivelLogrado(ContCajas, fila);
 				break;
 			}
 			case RIGTH: {
-				for (int i = 0; i < fila; i++) {
-					for (int j = 0; j < 9; j++) {
-						if (ContCajas < J1->PilaContadora.size()) {
-							if (J1->mat[i][j]->getId() == '!') {
-								ContCajas++;
-								break;
-							}
-						}
-					}
-				}
-				for (int i = 0; i < fila; i++) {
-					for (int j = 0; j < 9; j++) {
-						if (ContCajas > 0) {
-							if (J1->mat[i][j]->getId() == '$') {
-								ContCajas--;
-							}
-						}
-					}
-				}
-				if (J1->PilaContadora.size() == ContCajas) {
-					cout << "NIVEL SUPERADO";
-				}
+
 				if (J1->ini->getDerecha() != NULL) {
 					if (J1->ini->getDerecha()->getId() == ' ' || J1->ini->getDerecha()->getId() == '.') {
 						J1->ini = J1->ini->getDerecha();
@@ -514,32 +527,11 @@ void jugador::Movimientos(int X, int Y)
 						}
 					}
 				}
-			
+				J1->NivelLogrado(ContCajas, fila);
 				break;
 			}
 			case LEFT: {
-				for (int i = 0; i < fila; i++) {
-					for (int j = 0; j < 9; j++) {
-						if (ContCajas < J1->PilaContadora.size()) {
-							if (J1->mat[i][j]->getId() == '!') {
-								ContCajas++;
-								break;
-							}
-						}
-					}
-				}
-				for (int i = 0; i < fila; i++) {
-					for (int j = 0; j < 9; j++) {
-						if (ContCajas>0) {
-							if (J1->mat[i][j]->getId() == '$') {
-								ContCajas--;
-							}
-						}
-					}
-				}
-				if (J1->PilaContadora.size() == ContCajas) {
-					cout << "NIVEL SUPERADO";
-				}
+
 				if (J1->ini->getIzquierda() != NULL) {
 					if (J1->ini->getIzquierda()->getId() == ' ' || J1->ini->getIzquierda()->getId() == '.') {
 						J1->ini = J1->ini->getIzquierda();
@@ -597,7 +589,7 @@ void jugador::Movimientos(int X, int Y)
 					}
 
 				}
-			
+				J1->NivelLogrado(ContCajas, fila);
 				break;
 			}
 			default:
