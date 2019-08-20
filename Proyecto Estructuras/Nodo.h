@@ -4,6 +4,7 @@ class Nodo {
 
 private:
 	char id;
+	char PosId;
 	int x, y;
 	Nodo* Derecha;
 	Nodo* Izquierda;
@@ -26,5 +27,6 @@ public:
 	Nodo *getArriba();
 	void setAbajo(Nodo* Abajo);
 	Nodo *getAbajo();
-	
+	void setPosIniID(char ID);
+	char getPosIniID();
 };

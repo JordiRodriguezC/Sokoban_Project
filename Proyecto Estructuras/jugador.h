@@ -1,6 +1,7 @@
 #pragma once
 #include "Nodo.h"
 #include <iostream>
+#include <stack>
 using namespace std;
 class jugador {
 
@@ -10,6 +11,8 @@ public:
 	Nodo* ini;
 	Nodo*** mat;
 	jugador();
+	stack<char> PilaContadora;
+	int fila;
 	void crearLista(int x, int y);
 	void crearNivel(char map[][9],int x, int y);
 	void MenuInicio();

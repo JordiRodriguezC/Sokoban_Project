@@ -42,6 +42,14 @@ int Nodo::getY() {
 Nodo* Nodo::getAbajo() {
 	return Abajo;
 }
+void Nodo::setPosIniID(char ID)
+{
+	PosId = ID;
+}
+char Nodo::getPosIniID()
+{
+	return PosId;
+}
 Nodo* Nodo::getArriba() {
 	return Arriba;
 }
