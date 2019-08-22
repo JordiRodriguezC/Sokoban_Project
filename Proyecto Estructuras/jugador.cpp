@@ -86,7 +86,6 @@ void jugador::crearLista(int x, int y) {
 void jugador::crearNivel(char map[][9], int x, int y) {
 	for (int i = 0; i < x; i++) {
 		for (int j = 0; j < y; j++) {
-
 			if (map[i][j]=='$'|| map[i][j] == '!') {
 				J1->PilaContadora.push('$');
 			}
