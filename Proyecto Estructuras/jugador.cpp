@@ -314,6 +314,7 @@ void jugador::Movimientos(int X, int Y)
 #define LEFT 75
 #define RESTART 114
 #define EXIT 27
+#define SAVE 71
 	int ycont = 0;
 	int ContCajas = 0;
 	while (1) {
@@ -336,7 +337,6 @@ void jugador::Movimientos(int X, int Y)
 						else {
 							J1->ini->getAbajo()->setId(' ');
 						}
-
 						Y--;
 						J1->ini->setX(X);
 						J1->ini->setY(Y);
