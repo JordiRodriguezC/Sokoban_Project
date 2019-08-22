@@ -111,9 +111,10 @@ void jugador::crearNivel(char map[][9], int x, int y) {
 		cout << endl;
 	}
 	cout << endl << endl;
-	cout << "1- MENU PRINCIPAL" << endl;
-	cout << "2- Guardar Partida" << endl;
-	cout << "3- SALIR" << endl;
+	cout << "(S) Volver al menu principal" << endl;
+	cout << "(G) Guardar Partida" << endl;
+	cout << "(R) Reiniciar nivel" << endl;
+	cout << "(ESC) SALIR" << endl;
 
 }
 
@@ -312,6 +313,7 @@ void jugador::Movimientos(int X, int Y)
 #define RIGTH 77
 #define LEFT 75
 #define RESTART 114
+#define EXIT 27
 	int ycont = 0;
 	int ContCajas = 0;
 	while (1) {
@@ -496,6 +498,10 @@ void jugador::Movimientos(int X, int Y)
 			case RESTART: {
 				system("cls");
 				switch (nivel) {
+				case 1: {
+					J1->Nivel1();
+					break;
+				}
 				case 2: {
 					J1->Nivel2();
 					break;
@@ -512,9 +518,14 @@ void jugador::Movimientos(int X, int Y)
 					J1->Nivel5();
 					break;
 				}
-						break;
+				break;
 				}
 
+			}
+			case EXIT: {
+				system("cls");
+				exit(1);
+				break;
 			}
 			case RIGTH: {
 				
