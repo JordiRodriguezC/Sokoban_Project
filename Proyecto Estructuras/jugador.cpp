@@ -307,12 +307,14 @@ void jugador::Nivel5()
 
 void jugador::Movimientos(int X, int Y)
 {
-#define SALIR 115
+#define MENU 115
+#define MENUU 83
 #define DOWN 80
 #define UP 72
 #define RIGTH 77
 #define LEFT 75
 #define RESTART 114
+#define RESTARTT 82
 #define EXIT 27
 #define SAVE 71
 	int ycont = 0;
@@ -405,7 +407,14 @@ void jugador::Movimientos(int X, int Y)
 				break;
 			}
 
-			case SALIR: {
+			case MENU: {
+
+				system("cls");
+				J1->MenuInicio();
+
+				break;
+			}
+			case MENUU: {
 
 				system("cls");
 				J1->MenuInicio();
@@ -494,7 +503,34 @@ void jugador::Movimientos(int X, int Y)
 				}
 				break;
 			}
-
+			case RESTARTT: {
+			
+				system("cls");
+				switch (nivel) {
+				case 1: {
+					J1->Nivel1();
+					break;
+				}
+				case 2: {
+					J1->Nivel2();
+					break;
+				}
+				case 3: {
+					J1->Nivel3();
+					break;
+				}
+				case 4: {
+					J1->Nivel4();
+					break;
+				}
+				case 5: {
+					J1->Nivel5();
+					break;
+				}
+						break;
+				}
+			
+			}
 			case RESTART: {
 				system("cls");
 				switch (nivel) {
@@ -702,6 +738,7 @@ void jugador::Movimientos(int X, int Y)
 
 	}
 }
+
 
 
 
