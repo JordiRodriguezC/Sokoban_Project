@@ -14,7 +14,7 @@ void jugador::crearLista(int x, int y) {
 	for (int i = 0; i < x; i++) {
 		mat[i] = new Nodo * [y];
 	}
-	
+
 	for (int i = 0; i < x; i++) {
 		for (int j = 0; j < y; j++) {
 			mat[i][j] = new Nodo();
@@ -86,11 +86,12 @@ void jugador::crearLista(int x, int y) {
 void jugador::crearNivel(char map[][9], int x, int y) {
 	for (int i = 0; i < x; i++) {
 		for (int j = 0; j < y; j++) {
-			if (map[i][j]=='$'|| map[i][j] == '!') {
+			if (map[i][j] == '$' || map[i][j] == '!') {
 				J1->PilaContadora.push('$');
 			}
 			if (map[i][j] == '@') {
 				ini = mat[i][j];
+
 			}
 			if (map[i][j] == '!') {
 				mat[i][j]->setId(map[i][j]);
@@ -127,38 +128,66 @@ void jugador::MenuNivelPasado() {
 	cin >> Op;
 	switch (Op) {
 	case 1: {
+		J1->vector.clear();
 		nivel++;
 		system("cls");
 		switch (nivel) {
-			case 2: {
-				J1->Nivel2();
-				break;
-			}
-			case 3: {
-				J1->Nivel3();
-				break;
-			}
-			case 4: {
-				J1->Nivel4();
-				break;
-			}
-			case 5: {
-				J1->Nivel5();
-				break;
-			}
-			case 6: {
-				cout << "Felicidades..." << endl;
-				system("pause");
-				system("cls");
-				nivel = 1;
-				J1->MenuInicio();
-				break;
-			}
+		case 2: {
+			J1->Nivel2(false);
+			break;
+		}
+		case 3: {
+			J1->Nivel3(false);
+			break;
+		}
+		case 4: {
+			J1->Nivel4(false);
+			break;
+		}
+		case 5: {
+			J1->Nivel5(false);
+			break;
+		}
+		case 6: {
+			cout << "Felicidades..." << endl;
+			system("pause");
+			system("cls");
+			nivel = 1;
+			J1->MenuInicio();
+			break;
+		}
 		}
 		break;
 	}
 	case 2: {
-
+		system("cls");
+		switch (nivel) {
+		case 1: {
+			J1->Nivel1(true);
+			J1->repeticion(8, 6);
+			break;
+		}
+		case 2: {
+			J1->Nivel2(true);
+			J1->repeticion(8, 7);
+			break;
+		}
+		case 3: {
+			J1->Nivel3(true);
+			J1->repeticion(6, 5);
+			break;
+		}
+		case 4: {
+			J1->Nivel4(true);
+			J1->repeticion(6, 4);
+			break;
+		}
+		case 5: {
+			J1->Nivel5(true);
+			J1->repeticion(2, 5);
+			break;
+		}
+		}
 		break;
 	}
 	case 3: {
@@ -180,7 +209,7 @@ void jugador::MenuInicio()
 	case 1: {
 		J1 = new jugador();
 		system("cls");
-		J1->Nivel1();
+		J1->Nivel1(false);
 		break;
 	}
 	case 2: {
@@ -203,7 +232,7 @@ void jugador::gotoxy(int x, int y)
 	SetConsoleCursorPosition(hCon, dwPos);
 }
 
-void jugador::Nivel1()
+void jugador::Nivel1(bool repeticion)
 {
 	char map[8][9] =
 	{
@@ -221,10 +250,13 @@ void jugador::Nivel1()
 	cout << "MAPA 1" << endl << endl;
 	J1->crearNivel(map, 8, 9);
 	fila = 8;
-	Movimientos(8, 6);
+	if (!repeticion) {
+		J1->Movimientos(8, 6);
+	}
+	
 }
 
-void jugador::Nivel2()
+void jugador::Nivel2(bool repeticion)
 {
 	char map2[9][9] =
 	{
@@ -242,10 +274,13 @@ void jugador::Nivel2()
 	cout << "MAPA 2" << endl << endl;
 	J1->crearNivel(map2, 9, 9);
 	fila = 9;
-	Movimientos(8, 7);
+	if (!repeticion) {
+		J1->Movimientos(8, 7);
+	}
+	
 }
 
-void jugador::Nivel3()
+void jugador::Nivel3(bool repeticion)
 {
 	char map3[8][9] =
 	{
@@ -262,10 +297,13 @@ void jugador::Nivel3()
 	cout << "MAPA 3" << endl << endl;
 	J1->crearNivel(map3, 8, 9);
 	fila = 8;
-	Movimientos(6, 5);
+	if (!repeticion) {
+		J1->Movimientos(6, 5);
+	}
+	
 }
 
-void jugador::Nivel4()
+void jugador::Nivel4(bool repeticion)
 {
 	char map4[8][9] =
 	{
@@ -279,13 +317,16 @@ void jugador::Nivel4()
 		{ '#', '#', '#', '#', '#', '#','#','#',' '}
 	};
 	J1->crearLista(8, 9);
-	cout<< "MAPA 4" << endl << endl;
+	cout << "MAPA 4" << endl << endl;
 	J1->crearNivel(map4, 8, 9);
 	fila = 8;
-	Movimientos(6, 4);
+	if (!repeticion) {
+		J1->Movimientos(6, 4);
+	}
+	
 }
 
-void jugador::Nivel5()
+void jugador::Nivel5(bool repeticion)
 {
 	char map5[7][9] =
 	{
@@ -301,7 +342,10 @@ void jugador::Nivel5()
 	cout << "MAPA 5" << endl << endl;
 	J1->crearNivel(map5, 7, 9);
 	fila = 7;
-	Movimientos(2, 5);
+	if (!repeticion) {
+		J1->Movimientos(2, 5);
+	}
+	
 }
 
 
@@ -326,9 +370,9 @@ void jugador::Movimientos(int X, int Y)
 		if (_kbhit()) {
 			char tecla = _getch();
 			switch (tecla) {
-			
+
 			case UP: {
-				
+
 				if (J1->ini->getArriba() != NULL) {
 					if (J1->ini->getArriba()->getId() == ' ' || J1->ini->getArriba()->getId() == '.') {
 						J1->ini = J1->ini->getArriba();
@@ -345,17 +389,19 @@ void jugador::Movimientos(int X, int Y)
 						cout << J1->ini->getAbajo()->getId();
 						gotoxy(J1->ini->getX(), J1->ini->getY());
 						cout << J1->ini->getId();
+						J1->vector.push_back(UP);
+
 					}
 					else if (J1->ini->getArriba()->getId() == '$' || J1->ini->getArriba()->getId() == '!') {
 						if (J1->ini->getArriba()->getArriba() != NULL) {
 							if (J1->ini->getArriba()->getArriba()->getId() == ' ' || J1->ini->getArriba()->getArriba()->getId() == '.') {
 								if (J1->ini->getArriba()->getArriba()->getId() == ' ') {
 									J1->ini->getArriba()->getArriba()->setId('$');
-									
+
 								}
 								else {
 									J1->ini->getArriba()->getArriba()->setId('!');
-									
+
 								}
 								J1->ini = J1->ini->getArriba();
 								J1->ini->setId('@');
@@ -377,7 +423,7 @@ void jugador::Movimientos(int X, int Y)
 								cout << J1->ini->getId();
 								gotoxy(J1->ini->getX(), J1->ini->getY() - 1);
 								cout << J1->ini->getArriba()->getId();
-
+								J1->vector.push_back(UP);
 							}
 						}
 					}
@@ -422,7 +468,7 @@ void jugador::Movimientos(int X, int Y)
 				break;
 			}
 			case DOWN: {
-				
+
 				if (J1->ini->getAbajo() != NULL) {
 					if (J1->ini->getAbajo()->getId() == ' ' || J1->ini->getAbajo()->getId() == '.') {
 						J1->ini = J1->ini->getAbajo();
@@ -440,17 +486,18 @@ void jugador::Movimientos(int X, int Y)
 						cout << J1->ini->getArriba()->getId();
 						gotoxy(J1->ini->getX(), J1->ini->getY());
 						cout << J1->ini->getId();
+						J1->vector.push_back(DOWN);
 					}
 					else if (J1->ini->getAbajo()->getId() == '$' || J1->ini->getAbajo()->getId() == '!') {
 						if (J1->ini->getAbajo()->getAbajo() != NULL) {
 							if (J1->ini->getAbajo()->getAbajo()->getId() == ' ' || J1->ini->getAbajo()->getAbajo()->getId() == '.') {
 								if (J1->ini->getAbajo()->getAbajo()->getId() == ' ') {
 									J1->ini->getAbajo()->getAbajo()->setId('$');
-									
+
 								}
 								else {
 									J1->ini->getAbajo()->getAbajo()->setId('!');
-									
+
 								}
 
 								if (J1->ini->getPosIniID() == '.') {
@@ -474,6 +521,7 @@ void jugador::Movimientos(int X, int Y)
 								cout << J1->ini->getId();
 								gotoxy(J1->ini->getX(), J1->ini->getY() + 1);
 								cout << J1->ini->getAbajo()->getId();
+								J1->vector.push_back(DOWN);
 
 							}
 						}
@@ -504,57 +552,57 @@ void jugador::Movimientos(int X, int Y)
 				break;
 			}
 			case RESTARTT: {
-			
+
 				system("cls");
 				switch (nivel) {
 				case 1: {
-					J1->Nivel1();
+					J1->Nivel1(false);
 					break;
 				}
 				case 2: {
-					J1->Nivel2();
+					J1->Nivel2(false);
 					break;
 				}
 				case 3: {
-					J1->Nivel3();
+					J1->Nivel3(false);
 					break;
 				}
 				case 4: {
-					J1->Nivel4();
+					J1->Nivel4(false);
 					break;
 				}
 				case 5: {
-					J1->Nivel5();
+					J1->Nivel5(false);
 					break;
 				}
 						break;
 				}
-			
+
 			}
 			case RESTART: {
 				system("cls");
 				switch (nivel) {
 				case 1: {
-					J1->Nivel1();
+					J1->Nivel1(false);
 					break;
 				}
 				case 2: {
-					J1->Nivel2();
+					J1->Nivel2(false);
 					break;
 				}
 				case 3: {
-					J1->Nivel3();
+					J1->Nivel3(false);
 					break;
 				}
 				case 4: {
-					J1->Nivel4();
+					J1->Nivel4(false);
 					break;
 				}
 				case 5: {
-					J1->Nivel5();
+					J1->Nivel5(false);
 					break;
 				}
-				break;
+						break;
 				}
 
 			}
@@ -564,7 +612,7 @@ void jugador::Movimientos(int X, int Y)
 				break;
 			}
 			case RIGTH: {
-				
+
 				if (J1->ini->getDerecha() != NULL) {
 					if (J1->ini->getDerecha()->getId() == ' ' || J1->ini->getDerecha()->getId() == '.') {
 						J1->ini = J1->ini->getDerecha();
@@ -583,7 +631,7 @@ void jugador::Movimientos(int X, int Y)
 						cout << J1->ini->getIzquierda()->getId();
 						gotoxy(J1->ini->getX(), J1->ini->getY());
 						cout << J1->ini->getId();
-
+						J1->vector.push_back(RIGTH);
 					}
 					else if (J1->ini->getDerecha()->getId() == '$' || J1->ini->getDerecha()->getId() == '!') {
 						if (J1->ini->getDerecha()->getDerecha() != NULL) {
@@ -617,8 +665,7 @@ void jugador::Movimientos(int X, int Y)
 								cout << J1->ini->getId();
 								gotoxy(J1->ini->getX() + 2, J1->ini->getY());
 								cout << J1->ini->getDerecha()->getId();
-
-
+								J1->vector.push_back(RIGTH);
 							}
 						}
 					}
@@ -648,7 +695,7 @@ void jugador::Movimientos(int X, int Y)
 				break;
 			}
 			case LEFT: {
-				
+
 				if (J1->ini->getIzquierda() != NULL) {
 					if (J1->ini->getIzquierda()->getId() == ' ' || J1->ini->getIzquierda()->getId() == '.') {
 						J1->ini = J1->ini->getIzquierda();
@@ -667,7 +714,7 @@ void jugador::Movimientos(int X, int Y)
 						cout << J1->ini->getDerecha()->getId();
 						gotoxy(J1->ini->getX(), J1->ini->getY());
 						cout << J1->ini->getId();
-
+						J1->vector.push_back(LEFT);
 					}
 					else if (J1->ini->getIzquierda()->getId() == '$' || J1->ini->getIzquierda()->getId() == '!') {
 						if (J1->ini->getIzquierda()->getIzquierda() != NULL) {
@@ -700,7 +747,7 @@ void jugador::Movimientos(int X, int Y)
 								cout << J1->ini->getId();
 								gotoxy(J1->ini->getX() - 2, J1->ini->getY());
 								cout << J1->ini->getIzquierda()->getId();
-
+								J1->vector.push_back(LEFT);
 							}
 						}
 					}
@@ -739,7 +786,238 @@ void jugador::Movimientos(int X, int Y)
 	}
 }
 
+void jugador::repeticion(int X, int Y) {
+	
+	for (int i = 0; i < J1->vector.size(); i++) {
+		J1->ini->setX(X);
+		J1->ini->setY(Y);
+		gotoxy(J1->ini->getX(), J1->ini->getY());
+		Sleep(500);
+		switch (J1->vector[i]) {
+		case DOWN: {
+			if (J1->ini->getAbajo()->getId() == ' ' || J1->ini->getAbajo()->getId() == '.') {
+				J1->ini = J1->ini->getAbajo();
+				J1->ini->setId('@');
+				if (J1->ini->getArriba()->getPosIniID() == '.') {
+					J1->ini->getArriba()->setId('.');
+				}
+				else {
+					J1->ini->getArriba()->setId(' ');
+				}
 
+				Y++;
+				J1->ini->setX(X);
+				J1->ini->setY(Y);
+
+				cout << J1->ini->getArriba()->getId();
+				gotoxy(J1->ini->getX(), J1->ini->getY());
+				cout << J1->ini->getId();
+
+			}
+			else if (J1->ini->getAbajo()->getId() == '$' || J1->ini->getAbajo()->getId() == '!') {
+				if (J1->ini->getAbajo()->getAbajo()->getId() == ' ' || J1->ini->getAbajo()->getAbajo()->getId() == '.') {
+					if (J1->ini->getAbajo()->getAbajo()->getId() == ' ') {
+						J1->ini->getAbajo()->getAbajo()->setId('$');
+					}
+					else {
+						J1->ini->getAbajo()->getAbajo()->setId('!');
+
+					}
+
+					if (J1->ini->getPosIniID() == '.') {
+						J1->ini->setId('.');
+					}
+					else if (J1->ini->getPosIniID() == ' ') {
+						J1->ini->setId(' ');
+					}
+					else {
+						J1->ini->setId(' ');
+					}
+
+					J1->ini = J1->ini->getAbajo();
+					J1->ini->setId('@');
+
+					Y++;
+					J1->ini->setX(X);
+					J1->ini->setY(Y);
+					cout << J1->ini->getArriba()->getId();
+					gotoxy(J1->ini->getX(), J1->ini->getY());
+					cout << J1->ini->getId();
+					gotoxy(J1->ini->getX(), J1->ini->getY() + 1);
+					cout << J1->ini->getAbajo()->getId();
+				}
+			}
+			break;
+		}
+		case UP: {
+			if (J1->ini->getArriba()->getId() == ' ' || J1->ini->getArriba()->getId() == '.') {
+				J1->ini = J1->ini->getArriba();
+				J1->ini->setId('@');
+				if (J1->ini->getAbajo()->getPosIniID() == '.') {
+					J1->ini->getAbajo()->setId('.');
+				}
+				else {
+					J1->ini->getAbajo()->setId(' ');
+				}
+				Y--;
+				J1->ini->setX(X);
+				J1->ini->setY(Y);
+				cout << J1->ini->getAbajo()->getId();
+				gotoxy(J1->ini->getX(), J1->ini->getY());
+				cout << J1->ini->getId();
+				//Sleep(1000);
+			}
+			else if (J1->ini->getArriba()->getId() == '$' || J1->ini->getArriba()->getId() == '!') {
+				if (J1->ini->getArriba()->getArriba()->getId() == ' ' || J1->ini->getArriba()->getArriba()->getId() == '.') {
+					if (J1->ini->getArriba()->getArriba()->getId() == ' ') {
+						J1->ini->getArriba()->getArriba()->setId('$');
+
+					}
+					else {
+						J1->ini->getArriba()->getArriba()->setId('!');
+
+					}
+					J1->ini = J1->ini->getArriba();
+					J1->ini->setId('@');
+					if (J1->ini->getAbajo()->getPosIniID() == '.') {
+						J1->ini->getAbajo()->setId('.');
+					}
+					else if (J1->ini->getAbajo()->getPosIniID() == ' ') {
+						J1->ini->getAbajo()->setId(' ');
+					}
+					else {
+						J1->ini->getAbajo()->setId(' ');
+					}
+					Y--;
+					J1->ini->setX(X);
+					J1->ini->setY(Y);
+
+					cout << J1->ini->getAbajo()->getId();
+					gotoxy(J1->ini->getX(), J1->ini->getY());
+					cout << J1->ini->getId();
+					gotoxy(J1->ini->getX(), J1->ini->getY() - 1);
+					cout << J1->ini->getArriba()->getId();
+					//Sleep(1000);
+				}
+			}
+			break;
+		}
+		case RIGTH: {
+			if (J1->ini->getDerecha()->getId() == ' ' || J1->ini->getDerecha()->getId() == '.') {
+				J1->ini = J1->ini->getDerecha();
+				J1->ini->setId('@');
+				if (J1->ini->getIzquierda()->getPosIniID() == '.') {
+					J1->ini->getIzquierda()->setId('.');
+				}
+				else {
+					J1->ini->getIzquierda()->setId(' ');
+				}
+
+				X++;
+				X++;
+				J1->ini->setX(X);
+				J1->ini->setY(Y);
+				cout << J1->ini->getIzquierda()->getId();
+				gotoxy(J1->ini->getX(), J1->ini->getY());
+				cout << J1->ini->getId();
+				//Sleep(1000);
+			}
+			else if (J1->ini->getDerecha()->getId() == '$' || J1->ini->getDerecha()->getId() == '!') {
+				if (J1->ini->getDerecha()->getDerecha()->getId() == ' ' || J1->ini->getDerecha()->getDerecha()->getId() == '.') {
+					if (J1->ini->getDerecha()->getDerecha()->getId() == '.') {
+						J1->ini->getDerecha()->getDerecha()->setId('!');
+
+					}
+					else {
+						J1->ini->getDerecha()->getDerecha()->setId('$');
+					}
+					J1->ini = J1->ini->getDerecha();
+					J1->ini->setId('@');
+
+					if (J1->ini->getIzquierda()->getPosIniID() == ' ') {
+						J1->ini->getIzquierda()->setId(' ');
+					}
+					else if (J1->ini->getIzquierda()->getPosIniID() == '.') {
+						J1->ini->getIzquierda()->setId('.');
+					}
+					else {
+						J1->ini->getIzquierda()->setId(' ');
+					}
+
+					X++;
+					X++;
+					J1->ini->setX(X);
+					J1->ini->setY(Y);
+					cout << J1->ini->getIzquierda()->getId();
+					gotoxy(J1->ini->getX(), J1->ini->getY());
+					cout << J1->ini->getId();
+					gotoxy(J1->ini->getX() + 2, J1->ini->getY());
+					cout << J1->ini->getDerecha()->getId();
+					//Sleep(1000);
+				}
+			}
+			break;
+		}
+		case LEFT: {
+			if (J1->ini->getIzquierda() != NULL) {
+				if (J1->ini->getIzquierda()->getId() == ' ' || J1->ini->getIzquierda()->getId() == '.') {
+					J1->ini = J1->ini->getIzquierda();
+					J1->ini->setId('@');
+					if (J1->ini->getDerecha()->getPosIniID() == '.') {
+						J1->ini->getDerecha()->setId('.');
+					}
+					else {
+						J1->ini->getDerecha()->setId(' ');
+					}
+
+					X--;
+					X--;
+					J1->ini->setX(X);
+					J1->ini->setY(Y);
+					cout << J1->ini->getDerecha()->getId();
+					gotoxy(J1->ini->getX(), J1->ini->getY());
+					cout << J1->ini->getId();
+					//Sleep(1000);
+				}
+				else if (J1->ini->getIzquierda()->getId() == '$' || J1->ini->getIzquierda()->getId() == '!') {
+					if (J1->ini->getIzquierda()->getIzquierda()->getId() == ' ' || J1->ini->getIzquierda()->getIzquierda()->getId() == '.') {
+						if (J1->ini->getIzquierda()->getIzquierda()->getId() == '.') {
+							J1->ini->getIzquierda()->getIzquierda()->setId('!');
+						}
+						else {
+							J1->ini->getIzquierda()->getIzquierda()->setId('$');
+						}
+						J1->ini = J1->ini->getIzquierda();
+						J1->ini->setId('@');
+
+						if (J1->ini->getDerecha()->getPosIniID() == ' ') {
+							J1->ini->getDerecha()->setId(' ');
+						}
+						else if (J1->ini->getDerecha()->getPosIniID() == '.') {
+							J1->ini->getDerecha()->setId('.');
+						}
+						else {
+							J1->ini->getDerecha()->setId(' ');
+						}
+
+						X--;
+						X--;
+						J1->ini->setX(X);
+						J1->ini->setY(Y);
+						cout << J1->ini->getDerecha()->getId();
+						gotoxy(J1->ini->getX(), J1->ini->getY());
+						cout << J1->ini->getId();
+						gotoxy(J1->ini->getX() - 2, J1->ini->getY());
+						cout << J1->ini->getIzquierda()->getId();
+						
+					}
+				}
+				break;
+			}
+		}	
+	}
+	}
+}
 
 
 
