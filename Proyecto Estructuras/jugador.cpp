@@ -216,30 +216,27 @@ void jugador::MenuInicio()
 		break;
 	}
 	case 2: {
-		/*char cadena[128];
+		char cadena[128];
 		int w = 0;
 		ifstream fe("example.txt");
 		while (!fe.eof()) {
 			fe >> cadena;
-			for (int i = 0; i < 8; i++) {
+			for (int i = 0; i < fila; i++) {
 				for (int j = 0; j < 9; j++ ) {
 					mat[i][j]->setId(cadena[w]);
 					w++;
 				}
 			}
-			
 		}
 		fe.close();
-
+		
 		for (int i = 0; i < fila; i++) {
 			for (int j = 0; j < 8; j++) {
 				cout << mat[i][j]->getId();
 			}
 			cout << endl;
 		}
-		
-
-		break;*/
+		break;
 	}
 	case 3: {
 		exit(1);
@@ -808,8 +805,8 @@ void jugador::Movimientos(int X, int Y)
 			case SAVE: {
 				ofstream myfile;
 				myfile.open("example.txt");
-				for (int i = 0; i < 8; i++) {
-					for (int j = 0; j < fila; j++) {
+				for (int i = 0; i < fila; i++) {
+					for (int j = 0; j < 9; j++) {
 						myfile << mat[i][j]->getId();
 					}
 					myfile << "\n";
@@ -820,8 +817,8 @@ void jugador::Movimientos(int X, int Y)
 			case SAVES: {
 				ofstream myfile;
 				myfile.open("example.txt");
-				for (int i = 0; i < 8; i++) {
-					for (int j = 0; j < fila; j++) {
+				for (int i = 0; i < fila; i++) {
+					for (int j = 0; j < 9; j++) {
 						myfile << mat[i][j]->getId() << " ";
 					}
 					myfile << "\n";
