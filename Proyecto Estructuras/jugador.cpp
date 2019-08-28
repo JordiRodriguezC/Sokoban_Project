@@ -579,6 +579,7 @@ void jugador::Movimientos(int X, int Y)
 			case RESTARTT: {
 
 				system("cls");
+				J1->vector.clear();
 				switch (nivel) {
 				case 1: {
 					J1->Nivel1(false);
@@ -606,6 +607,7 @@ void jugador::Movimientos(int X, int Y)
 			}
 			case RESTART: {
 				system("cls");
+				J1->vector.clear();
 				switch (nivel) {
 				case 1: {
 					J1->Nivel1(false);
@@ -1065,6 +1067,7 @@ void jugador::repeticion(int X, int Y) {
 		}	
 	}
 	}
+	J1->MenuNivelPasado();
 }
 
 

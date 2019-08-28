@@ -1,2 +1,5 @@
 ﻿  jugador.cpp
+  LINK : no se encontró C:\Users\Jordy\Documents\GitHub\Sokoban_Project\x64\Debug\Proyecto Estructuras.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+Proyecto Estructuras.obj : warning LNK4099: no se encontró PDB 'vc142.pdb' con 'Proyecto Estructuras.obj' o en 'C:\Users\Jordy\Documents\GitHub\Sokoban_Project\x64\Debug\vc142.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+Nodo.obj : warning LNK4099: no se encontró PDB 'vc142.pdb' con 'Nodo.obj' o en 'C:\Users\Jordy\Documents\GitHub\Sokoban_Project\x64\Debug\vc142.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
   Proyecto Estructuras.vcxproj -> C:\Users\Jordy\Documents\GitHub\Sokoban_Project\x64\Debug\Proyecto Estructuras.exe
