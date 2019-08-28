@@ -4,6 +4,9 @@
 #include <Windows.h>
 #include <conio.h>
 #include <stack>
+#include <fstream>
+#include <stdio.h>
+
 using namespace std;
 jugador* J1 = new jugador();
 jugador::jugador() {
@@ -213,7 +216,30 @@ void jugador::MenuInicio()
 		break;
 	}
 	case 2: {
-		break;
+		/*char cadena[128];
+		int w = 0;
+		ifstream fe("example.txt");
+		while (!fe.eof()) {
+			fe >> cadena;
+			for (int i = 0; i < 8; i++) {
+				for (int j = 0; j < 9; j++ ) {
+					mat[i][j]->setId(cadena[w]);
+					w++;
+				}
+			}
+			
+		}
+		fe.close();
+
+		for (int i = 0; i < fila; i++) {
+			for (int j = 0; j < 8; j++) {
+				cout << mat[i][j]->getId();
+			}
+			cout << endl;
+		}
+		
+
+		break;*/
 	}
 	case 3: {
 		exit(1);
@@ -360,7 +386,9 @@ void jugador::Movimientos(int X, int Y)
 #define RESTART 114
 #define RESTARTT 82
 #define EXIT 27
-#define SAVE 71
+#define SAVE 103
+#define SAVES 71;
+
 	int ycont = 0;
 	int ContCajas = 0;
 	while (1) {
@@ -777,12 +805,35 @@ void jugador::Movimientos(int X, int Y)
 				}
 				break;
 			}
+			case SAVE: {
+				ofstream myfile;
+				myfile.open("example.txt");
+				for (int i = 0; i < 8; i++) {
+					for (int j = 0; j < fila; j++) {
+						myfile << mat[i][j]->getId();
+					}
+					myfile << "\n";
+				}
+				myfile.close();
+				break;
+			}
+			/*case SAVES: {
+				ofstream myfile;
+				myfile.open("example.txt");
+				for (int i = 0; i < 8; i++) {
+					for (int j = 0; j < fila; j++) {
+						myfile << mat[i][j]->getId() << " ";
+					}
+					myfile << "\n";
+				}
+				myfile.close();
+				break;
+			}*/
 			default:
 				break;
 			}
 
 		}
-
 	}
 }
 
