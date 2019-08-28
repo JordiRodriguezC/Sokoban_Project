@@ -387,7 +387,7 @@ void jugador::Movimientos(int X, int Y)
 #define RESTARTT 82
 #define EXIT 27
 #define SAVE 103
-#define SAVES 71;
+#define SAVES 71
 
 	int ycont = 0;
 	int ContCajas = 0;
@@ -817,7 +817,7 @@ void jugador::Movimientos(int X, int Y)
 				myfile.close();
 				break;
 			}
-			/*case SAVES: {
+			case SAVES: {
 				ofstream myfile;
 				myfile.open("example.txt");
 				for (int i = 0; i < 8; i++) {
@@ -828,7 +828,7 @@ void jugador::Movimientos(int X, int Y)
 				}
 				myfile.close();
 				break;
-			}*/
+			}
 			default:
 				break;
 			}
